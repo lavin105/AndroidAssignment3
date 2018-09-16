@@ -19,6 +19,8 @@ public class Class_List extends Activity {
     ArrayList<ArrayList<String>>listOfStudentsList;
     ArrayAdapter<String> adapter2;
     final int REQUEST_CODE_1=1;
+    final int REQUEST_CODE_2=2;
+
 
     public void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,19 @@ public class Class_List extends Activity {
 
             }
         }
+        if(requestCode==REQUEST_CODE_2){
+            if(resultCode==RESULT_OK){
+               System.out.println(data.getStringExtra("classNme"));
+               System.out.println(data.getStringExtra("classNum"));
+               System.out.println(data.getStringExtra("key"));
+               String p = data.getStringExtra("key");
+               int key=Integer.parseInt(p);
+               listOfClasses.set(key,"test");
+               classList.setAdapter(adapter2);
+                adapter2.notifyDataSetChanged();
+
+            }
+        }
         classList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -72,7 +87,8 @@ public class Class_List extends Activity {
                 infoIntent.putExtra("cName",classNameInfo);
                 infoIntent.putExtra("cNumber",classNumberInfo);
                 infoIntent.putStringArrayListExtra("stuList", theStudents);
-                startActivity(infoIntent);
+                infoIntent.putExtra("item_position", position);
+                startActivityForResult(infoIntent,REQUEST_CODE_2);
             }
         });
     }

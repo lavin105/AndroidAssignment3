@@ -16,6 +16,8 @@ public class Class_Info extends Activity {
     Button toClassList;
     ListView students;
     ArrayAdapter<String> allStudents;
+    String cName,cNumber;
+    int pos;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,7 @@ public class Class_Info extends Activity {
        if (bundle!=null){
            theclass.setText(bundle.getString("cName"));
            theclassnumber.setText(bundle.getString("cNumber"));
+          pos=bundle.getInt("item_position");
            allStudents=new ArrayAdapter<>(Class_Info.this,android.R.layout.simple_list_item_1,bundle.getStringArrayList("stuList"));
            students.setAdapter(allStudents);
        }
@@ -35,8 +38,14 @@ public class Class_Info extends Activity {
        toClassList.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent i = new Intent(Class_Info.this,Class_List.class);
-               startActivity(i);
+               cName=theclass.getText().toString();
+               cNumber=theclassnumber.getText().toString();
+               Intent i = new Intent();
+               i.putExtra("classNme",cName);
+               i.putExtra("classNum",cNumber);
+               i.putExtra("key",Integer.toString(pos));
+               setResult(RESULT_OK,i);
+               finish();
            }
        });
 
