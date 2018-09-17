@@ -20,6 +20,8 @@
             android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity android:name=".Class_Info"
             android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity android:name=".Add_Student"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
 
     </application>
 </manifest>

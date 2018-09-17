@@ -3,11 +3,13 @@ package lavin105.classorganizer;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,12 +51,20 @@ public class Add_Class extends Activity {
             public void onClick(View v) {
                 name=className.getText().toString();
                 number=classNumber.getText().toString();
-                Intent i = new Intent();
-                i.putExtra("className",name);
-                i.putExtra("classNumber",number);
-                i.putExtra("studentList",students);
-                setResult(RESULT_OK,i);
-                finish();
+                if(name.equals("")||number.equals("")){
+                   Toast t= Toast.makeText(Add_Class.this,"Field Missing",Toast.LENGTH_SHORT);
+                   t.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL,0,200);
+                   t.show();
+                }else{
+                    Intent i = new Intent();
+                    i.putExtra("className",name);
+                    i.putExtra("classNumber",number);
+                    i.putExtra("studentList",students);
+                    setResult(RESULT_OK,i);
+                    finish();
+                }
+
+
 
 
 

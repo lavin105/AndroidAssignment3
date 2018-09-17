@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 public class Class_Info extends Activity {
     TextView theclass,theclassnumber;
-    Button toClassList, editCName, editCNumber;
+    Button toClassList, editCName, editCNumber, delete;
     ListView students;
     ArrayAdapter<String> allStudents;
     String cName,cNumber;
@@ -27,6 +27,7 @@ public class Class_Info extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_info_layout);
+        delete=findViewById(R.id.deleteClass);
         editCName=findViewById(R.id.editName);
         editCNumber=findViewById(R.id.editNumber);
         students=findViewById(R.id.students_list);
@@ -127,6 +128,15 @@ public class Class_Info extends Activity {
                i.putExtra("classNum",cNumber);
                i.putExtra("key",Integer.toString(pos));
                setResult(RESULT_OK,i);
+               finish();
+           }
+       });
+       delete.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent i =new Intent();
+               i.putExtra("deleteKey", Integer.toString(pos));
+               setResult(RESULT_CANCELED,i);
                finish();
            }
        });

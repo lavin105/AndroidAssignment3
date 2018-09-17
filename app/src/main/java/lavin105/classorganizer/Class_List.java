@@ -77,6 +77,15 @@ public class Class_List extends Activity {
                 System.out.println(listOfClassNumbers);
 
             }
+            if (resultCode==RESULT_CANCELED){
+                String pp = data.getStringExtra("deleteKey");
+                int delkey=Integer.parseInt(pp);
+                listOfClasses.remove(delkey);
+                listOfClassNumbers.remove(delkey);
+                listOfStudentsList.remove(delkey);
+                classList.setAdapter(adapter2);
+                adapter2.notifyDataSetChanged();
+            }
         }
         classList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
