@@ -31,7 +31,6 @@ public class Add_Class extends Activity {
         classNumber=findViewById(R.id.class_number);
         studentList=findViewById(R.id.student_list);
         addStudent=findViewById(R.id.addStu);
-        studentName=findViewById(R.id.student);
         submit=findViewById(R.id.add_class);
         students=new ArrayList<String>();
         adapter=new ArrayAdapter<String>(Add_Class.this,android.R.layout.simple_list_item_1,students);

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -154,6 +155,35 @@ public class Class_Info extends Activity {
            public void onClick(View v) {
                Intent anotherStudent= new Intent(Class_Info.this,Add_Student.class);
                startActivityForResult(anotherStudent,REQUEST_CODE_4);
+
+           }
+       });
+
+       students.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+               AlertDialog.Builder alert3= new AlertDialog.Builder(Class_Info.this);
+               alert3.setTitle("Delete Student");
+               alert3.setMessage("Would you like to delete this student?");
+
+               alert3.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int which) {
+                       studentLst.remove(position);
+                       students.setAdapter(allStudents);
+                       allStudents.notifyDataSetChanged();
+
+                   }
+               });
+               alert3.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int which) {
+                       dialog.dismiss();
+                   }
+               });
+               final AlertDialog theAlert3=alert3.create();
+               theAlert3.show();
+
 
            }
        });
