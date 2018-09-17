@@ -14,15 +14,19 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class Class_Info extends Activity {
     TextView theclass,theclassnumber;
-    Button toClassList, editCName, editCNumber, delete;
+    Button toClassList, editCName, editCNumber, delete, newStu;
     ListView students;
     ArrayAdapter<String> allStudents;
     String cName,cNumber;
     EditText alert1input;
     EditText alert2input;
+    ArrayList<String> studentLst;
     int pos;
+    final int REQUEST_CODE_4=4;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +38,7 @@ public class Class_Info extends Activity {
         toClassList=findViewById(R.id.toClasses);
          theclass =findViewById(R.id.className);
          theclassnumber=findViewById(R.id.classNumber);
+         newStu=findViewById(R.id.new_student);
 
         AlertDialog.Builder alert= new AlertDialog.Builder(Class_Info.this);
         alert.setTitle("Edit Class Name");
@@ -114,7 +119,8 @@ public class Class_Info extends Activity {
            theclass.setText(bundle.getString("cName"));
            theclassnumber.setText(bundle.getString("cNumber"));
           pos=bundle.getInt("item_position");
-           allStudents=new ArrayAdapter<>(Class_Info.this,android.R.layout.simple_list_item_1,bundle.getStringArrayList("stuList"));
+          studentLst=bundle.getStringArrayList("stuList");
+           allStudents=new ArrayAdapter<>(Class_Info.this,android.R.layout.simple_list_item_1,studentLst);
            students.setAdapter(allStudents);
        }
 
@@ -127,6 +133,7 @@ public class Class_Info extends Activity {
                i.putExtra("classNme",cName);
                i.putExtra("classNum",cNumber);
                i.putExtra("key",Integer.toString(pos));
+               i.putStringArrayListExtra("listy",studentLst);
                setResult(RESULT_OK,i);
                finish();
            }
@@ -141,5 +148,28 @@ public class Class_Info extends Activity {
            }
        });
 
+
+       newStu.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent anotherStudent= new Intent(Class_Info.this,Add_Student.class);
+               startActivityForResult(anotherStudent,REQUEST_CODE_4);
+
+           }
+       });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==REQUEST_CODE_4){
+            if(resultCode==RESULT_OK){
+
+                studentLst.add(data.getStringExtra("name"));
+                students.setAdapter(allStudents);
+                allStudents.notifyDataSetChanged();
+            }
+        }
     }
 }

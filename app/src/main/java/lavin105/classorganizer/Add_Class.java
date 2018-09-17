@@ -20,6 +20,7 @@ public class Add_Class extends Activity {
     ListView studentList, classes;
     ArrayList<String> students;
     ArrayAdapter<String> adapter;
+    final int REQUEST_CODE_3=3;
 
     String name,number;
     @Override
@@ -39,10 +40,9 @@ public class Add_Class extends Activity {
         addStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String student=studentName.getText().toString();
-                students.add(student);
-                adapter.notifyDataSetChanged();
-                studentName.setText("");
+               Intent newStudentIntent = new Intent(Add_Class.this,Add_Student.class);
+               startActivityForResult(newStudentIntent,REQUEST_CODE_3);
+
             }
         });
 
@@ -73,5 +73,26 @@ public class Add_Class extends Activity {
 
 
 
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==REQUEST_CODE_3){
+            if(resultCode==RESULT_OK){
+
+
+                System.out.println("-------------------------------");
+                System.out.println(data.getStringExtra("name"));
+                System.out.println(data.getStringExtra("id"));
+                students.add(data.getStringExtra("name"));
+                studentList.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
+
+            }
+        }
     }
 }

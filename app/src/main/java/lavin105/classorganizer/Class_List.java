@@ -74,6 +74,7 @@ public class Class_List extends Activity {
                classList.setAdapter(adapter2);
                 adapter2.notifyDataSetChanged();
                 listOfClassNumbers.set(key,data.getStringExtra("classNum"));
+                listOfStudentsList.set(key,data.getStringArrayListExtra("listy"));
                 System.out.println(listOfClassNumbers);
 
             }

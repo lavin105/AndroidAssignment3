@@ -38,18 +38,6 @@
         android:hint="Class Number"
         android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/student"
-        android:layout_width="198dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="12dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Student Name"
-        android:inputType="textPersonName" />
-
     <Button
         android:id="@+id/addStu"
         android:layout_width="wrap_content"
