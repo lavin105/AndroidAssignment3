@@ -40,6 +40,7 @@ public class Add_Class extends Activity {
                 String student=studentName.getText().toString();
                 students.add(student);
                 adapter.notifyDataSetChanged();
+                studentName.setText("");
             }
         });
 

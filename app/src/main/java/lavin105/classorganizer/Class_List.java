@@ -70,9 +70,11 @@ public class Class_List extends Activity {
                System.out.println(data.getStringExtra("key"));
                String p = data.getStringExtra("key");
                int key=Integer.parseInt(p);
-               listOfClasses.set(key,"test");
+               listOfClasses.set(key,data.getStringExtra("classNme"));
                classList.setAdapter(adapter2);
                 adapter2.notifyDataSetChanged();
+                listOfClassNumbers.set(key,data.getStringExtra("classNum"));
+                System.out.println(listOfClassNumbers);
 
             }
         }
