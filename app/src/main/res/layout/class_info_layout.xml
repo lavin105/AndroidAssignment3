@@ -136,5 +136,13 @@
         android:layout_marginStart="11dp"
         android:text="Click to delete" />
 
+    <Button
+        android:id="@+id/sort_student"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/new_student"
+        android:layout_alignStart="@+id/textView"
+        android:text="Sort" />
+
 
 </RelativeLayout>

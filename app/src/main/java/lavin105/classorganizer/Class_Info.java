@@ -16,10 +16,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Class_Info extends Activity {
     TextView theclass,theclassnumber;
-    Button toClassList, editCName, editCNumber, delete, newStu;
+    Button toClassList, editCName, editCNumber, delete, newStu, sortStudent;
     ListView students;
     ArrayAdapter<String> allStudents;
     String cName,cNumber;
@@ -32,6 +34,7 @@ public class Class_Info extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.class_info_layout);
+        sortStudent=findViewById(R.id.sort_student);
         delete=findViewById(R.id.deleteClass);
         editCName=findViewById(R.id.editName);
         editCNumber=findViewById(R.id.editNumber);
@@ -86,12 +89,6 @@ public class Class_Info extends Activity {
         });
 
         final AlertDialog theAlert2=alert2.create();
-
-
-
-
-
-
 
          editCName.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -185,6 +182,14 @@ public class Class_Info extends Activity {
                theAlert3.show();
 
 
+           }
+       });
+       sortStudent.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Collections.sort(studentLst);
+               allStudents=new ArrayAdapter<>(Class_Info.this,android.R.layout.simple_list_item_1,studentLst);
+               students.setAdapter(allStudents);
            }
        });
 
