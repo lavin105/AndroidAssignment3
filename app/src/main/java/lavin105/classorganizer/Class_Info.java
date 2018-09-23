@@ -1,3 +1,7 @@
+/*Brandon Lavinsky
+ * lavin105@mail.chapman.edu
+ * Class_Info.java*/
+
 package lavin105.classorganizer;
 
 import android.app.Activity;
@@ -18,6 +22,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
+/*This class displays the classes information and allows the user to edit the class name and number as well as add students
+* students can be deleted by clicking on the student in the list they are also able to be sorted alphabetically
+* Classes can also be deleted from this page by clicking delete class,clicking add student from this page will allow you to add students
+* to the list*/
 
 public class Class_Info extends Activity {
     TextView theclass,theclassnumber;
@@ -44,6 +53,7 @@ public class Class_Info extends Activity {
          theclassnumber=findViewById(R.id.classNumber);
          newStu=findViewById(R.id.new_student);
 
+        //multiple alerts were created in order to edit class name and number
         AlertDialog.Builder alert= new AlertDialog.Builder(Class_Info.this);
         alert.setTitle("Edit Class Name");
         alert.setMessage("Please enter the new class name");
@@ -111,7 +121,7 @@ public class Class_Info extends Activity {
 
 
 
-
+        //retrieving data fromthe Class list activity
        Bundle bundle=getIntent().getExtras();
        if (bundle!=null){
            theclass.setText(bundle.getString("cName"));
@@ -121,7 +131,7 @@ public class Class_Info extends Activity {
            allStudents=new ArrayAdapter<>(Class_Info.this,android.R.layout.simple_list_item_1,studentLst);
            students.setAdapter(allStudents);
        }
-
+       //takes to back to the class list
        toClassList.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -136,6 +146,7 @@ public class Class_Info extends Activity {
                finish();
            }
        });
+       //deletes the class
        delete.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -146,7 +157,7 @@ public class Class_Info extends Activity {
            }
        });
 
-
+        //ridirects to the add student activty
        newStu.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -155,7 +166,7 @@ public class Class_Info extends Activity {
 
            }
        });
-
+        //allows for students to be deleted by clicking on their name in the list
        students.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -184,6 +195,7 @@ public class Class_Info extends Activity {
 
            }
        });
+       //sorting students alphabetically
        sortStudent.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -194,7 +206,7 @@ public class Class_Info extends Activity {
        });
 
     }
-
+    //retrieving results from the add student activity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

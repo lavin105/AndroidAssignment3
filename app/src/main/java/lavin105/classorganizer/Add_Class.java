@@ -1,3 +1,7 @@
+/*Brandon Lavinsky
+ * lavin105@mail.chapman.edu
+ * Add_Class.java*/
+
 package lavin105.classorganizer;
 
 import android.app.Activity;
@@ -13,6 +17,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+/* This activity is where you specify the class name and number as well as have the ability to add students
+* If add students is selected you will be redirected to the add student activity where you will input the information
+* Students cannot be deleted in this activity but rather in the class info activity*/
 
 public class Add_Class extends Activity {
     EditText studentName,className,classNumber;
@@ -36,6 +44,7 @@ public class Add_Class extends Activity {
         adapter=new ArrayAdapter<String>(Add_Class.this,android.R.layout.simple_list_item_1,students);
         studentList.setAdapter(adapter);
 
+        //adding a student
         addStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,6 +54,7 @@ public class Add_Class extends Activity {
             }
         });
 
+        //adding a class to your class list
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,11 +72,6 @@ public class Add_Class extends Activity {
                     setResult(RESULT_OK,i);
                     finish();
                 }
-
-
-
-
-
             }
         });
 
@@ -75,7 +80,7 @@ public class Add_Class extends Activity {
 
 
     }
-
+    //onActivityResult for retrieving data from the add student activity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

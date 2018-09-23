@@ -1,3 +1,7 @@
+/*Brandon Lavinsky
+* lavin105@mail.chapman.edu
+* Class_List.java*/
+
 package lavin105.classorganizer;
 
 import android.app.Activity;
@@ -14,6 +18,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/*this class displays the list of classes as well as a button to add new classes
+an array adapter and array list is used to store and display classes into the listview
+If the user clicks on a class it will direct them to the Class info activity where they can interact with the class*/
 public class Class_List extends Activity {
     ListView classList;
     ArrayList<String> listOfClasses, listOfClassNumbers;
@@ -30,11 +37,13 @@ public class Class_List extends Activity {
             listOfClasses=new ArrayList<String>();
             listOfClassNumbers=new ArrayList<String>();
             classList=findViewById(R.id.class_list);
+            //displays the list of classes
             adapter2=new ArrayAdapter<>(Class_List.this,android.R.layout.simple_list_item_1,listOfClasses);
             classList.setAdapter(adapter2);
             adapter2.notifyDataSetChanged();
 
         Button newClass=findViewById(R.id.new_class);
+        //ridirects to add class activity
         newClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,15 +53,12 @@ public class Class_List extends Activity {
         });
 
 
-
-
-
-
     }
-
+    //recieves multipe data results from many activities
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        //data from adding a class
         if(requestCode==REQUEST_CODE_1){
             if(resultCode==RESULT_OK){
                 String classToAdd=data.getStringExtra("className");
@@ -66,6 +72,7 @@ public class Class_List extends Activity {
 
             }
         }
+        //data from editing a class
         if(requestCode==REQUEST_CODE_2){
             if(resultCode==RESULT_OK){
                System.out.println(data.getStringExtra("classNme"));
@@ -81,6 +88,7 @@ public class Class_List extends Activity {
                 System.out.println(listOfClassNumbers);
 
             }
+            //data from deleting a class
             if (resultCode==RESULT_CANCELED){
                 String pp = data.getStringExtra("deleteKey");
                 int delkey=Integer.parseInt(pp);
@@ -91,6 +99,7 @@ public class Class_List extends Activity {
                 adapter2.notifyDataSetChanged();
             }
         }
+        //clicking on a class takes you to class info activity
         classList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

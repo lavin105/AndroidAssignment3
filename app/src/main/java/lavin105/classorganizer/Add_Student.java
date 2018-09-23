@@ -1,3 +1,7 @@
+/*Brandon Lavinsky
+ * lavin105@mail.chapman.edu
+ * Add_Student.java*/
+
 package lavin105.classorganizer;
 
 import android.app.Activity;
@@ -11,6 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+/*This class is where students can be added, a first name last name and id number along with a picture are available,
+* by clicking add student it will direct you to either the add class activity or the class info
+* activity depending in which activity you clicked on add student*/
 
 public class Add_Student extends Activity {
 
@@ -30,6 +38,7 @@ public class Add_Student extends Activity {
         takePhoto=findViewById(R.id.photo);
         studentPhoto=findViewById(R.id.pic);
 
+        //adds a student to the student list for a particular class
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,12 +62,14 @@ public class Add_Student extends Activity {
 
             }
         });
+        //cancels adding a student
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+        //starts the camera to take a photo
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +79,7 @@ public class Add_Student extends Activity {
         });
 
     }
-
+    //retrieves the camera photo and set the image view to that picture
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
